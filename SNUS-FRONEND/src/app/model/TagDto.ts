@@ -3,4 +3,5 @@ export interface TagDto {
   description?: string;
   dateTime: Date;
   value: number;
+  type: string;
 }

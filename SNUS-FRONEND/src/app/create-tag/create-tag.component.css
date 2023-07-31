@@ -1,0 +1,37 @@
+.form-field {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+label{
+  color: #F2EEE7;
+  font-weight: bold;
+  font-size: large;
+  font-family: Georgia;
+  margin-right: 1rem;
+}
+
+.simpleParent{
+  display: grid;
+  place-items: center;
+}
+
+select {
+  width: 200px;
+  padding: 8px;
+  border-style: none;
+  border-radius: 4px;
+  background-color: #3e61a8;
+  color: #F2EEE7;
+  font-size: 16px;
+}
+
+select option {
+  border-style: none;
+  color: #F2EEE7;
+  font-weight: bold;
+  font-size: large;
+  font-family: Georgia;
+}

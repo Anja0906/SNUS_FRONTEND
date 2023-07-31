@@ -1,0 +1,15 @@
+<form [formGroup]="yourForm" class="simpleParent">
+  <div class="form-field">
+    <label for="dropdown">Select an option:</label>
+    <select id="dropdown" formControlName="selectedOption" (change)="onOptionSelected($event)">
+      <option value="Analog input">Analog input</option>
+      <option value="Digital input">Digital input</option>
+      <option value="Analog output">Analog output</option>
+      <option value="Digital output">Digital output</option>
+    </select>
+  </div>
+</form>
+<app-do-tag *ngIf="do"></app-do-tag>
+<app-di-tag *ngIf="di"></app-di-tag>
+<app-ai-tag *ngIf="ai"></app-ai-tag>
+<app-ao-tag *ngIf="ao"></app-ao-tag>

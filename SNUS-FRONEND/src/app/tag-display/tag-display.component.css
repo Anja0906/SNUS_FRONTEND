@@ -1,0 +1,56 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  color: #F2EEE7;
+}
+
+.container{
+  background-image: linear-gradient(to left, #435892, #393F50);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
+  width: 80%;
+  margin-top: 5rem;
+  max-height: 80vh; /* Adjust the value to set the desired fixed height */
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.parent{
+  display: grid;
+  place-items: center;
+
+}
+
+thead {
+  background-color: #393F50;
+  background-image: linear-gradient(to left, #435892, #393F50);
+  color: #BCAA8A;
+  position: sticky;
+  top: 0;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #435892;
+}
+
+
+tr:hover {
+  background-color:  #435892;
+  background-image: linear-gradient(to left, #435892, #393F50);
+  color: #BCAA8A;
+}
+
+.container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #BCAA8A;
+  border-radius: 5px;
+}
+
+
+
