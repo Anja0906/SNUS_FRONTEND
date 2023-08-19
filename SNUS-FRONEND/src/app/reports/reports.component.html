@@ -1,1 +1,156 @@
-<button style="z-index: 200; width: 3rem">AAAA</button>
+<div class="top-parent">
+  <h3>Reports page</h3>
+</div>
+<div class="parent">
+  <div></div>
+  <div class="top">
+    <div class="top-right">
+      <div class="container">
+        <div class="radio-group">
+          <label class="radio">
+            <input type="radio" name="sort" value="Time">
+            <span class="radio-custom"></span>
+            Time
+          </label>
+          <label class="radio">
+            <input type="radio" name="sort" value="Priority">
+            <span class="radio-custom"></span>
+            Priority
+          </label>
+          <label class="radio">
+            <input type="radio" name="sort" value="Value">
+            <span class="radio-custom"></span>
+            Value
+          </label>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="container">
+        <div class="radio-group">
+          <label class="radio">
+            <input type="radio" name="sortType" value="Ascending">
+            <span class="radio-custom"></span>
+            Ascending
+          </label>
+          <label class="radio">
+            <input type="radio" name="sortType" value="Descending">
+            <span class="radio-custom"></span>
+            Descending
+          </label>
+        </div>
+      </div>
+    </div>
+    <div></div>
+    <div class="container">
+      <div class="text">Report type:</div>
+      <select id="dropdown" [(ngModel)]="selectedOption">
+        <option value="1">Alarms in date range</option>
+        <option value="2">Alarms with some priority</option>
+        <option value="3">All tags by date range</option>
+        <option value="4">Last AI tags values</option>
+        <option value="5">Last DI tags values</option>
+        <option value="6">All tags by id</option>
+      </select>
+    </div>
+    <div></div>
+    <div class="top-right">
+      <div class="container">
+        <div class="input-container">
+          <label >Date from:</label>
+          <input type="datetime-local" [(ngModel)]="dateFrom">
+        </div>
+
+        <div class="input-container">
+          <label class="input-label">Date to:</label>
+          <input type="datetime-local" [(ngModel)]="dateTo">
+        </div>
+      </div>
+      <div class="divider"></div>
+<!--      odavde je desna strana      -->
+      <div class="container">
+        <div class="input-container" *ngIf="!sixth">
+          <label class="input-label">Priority:</label>
+          <input type="number" [(ngModel)]="inputValue">
+        </div>
+        <div class="input-container" *ngIf="sixth">
+          <label class="input-label">Name:</label>
+          <input type="text">
+        </div>
+        <div class="input-container">
+          <button class="btn" (click)="getData()">Confirm changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div></div>
+  <div class="bottom" *ngIf="tagData || alarmData">
+    <div class="container">
+      <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search...">
+        <div class="search-icon">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table-container" *ngIf="tagData">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date Time</th>
+            <th>Value</th>
+            <th>Type</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of tagData" (click)="displayTag(item)">
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.dateTime | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+            <td>{{ item.value }}</td>
+            <td>{{ item.type }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table-container" *ngIf="alarmData">
+          <thead>
+          <tr>
+            <th>AnalogInput id</th>
+            <th>Date Time</th>
+            <th>Priority</th>
+            <th>Type</th>
+            <th>Message</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of alarmData" (click)="displayAlarm(item)">
+            <td>{{ item.analogId }}</td>
+            <td>{{ item.timeStamp }}</td>
+            <td>{{ item.priority | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.message }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div></div>
+    <div class="container">
+      <ngx-charts-line-chart
+        [animations]="true"
+        [view]="[550, 400]"
+        [customColors]="colorScheme"
+        [results]="lineChartData"
+        [xAxis]="false"
+        [yAxis]="true"
+        [gradient]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [tooltipDisabled]="false"
+        [autoScale]="true"
+      >
+      </ngx-charts-line-chart>
+    </div>
+  </div>
+  <div></div>
+</div>

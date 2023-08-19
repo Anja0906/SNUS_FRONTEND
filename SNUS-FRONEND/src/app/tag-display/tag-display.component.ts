@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {TagDto} from "../model/TagDto";
 import {TagService} from "../service/tag.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tag-display',
@@ -27,8 +28,12 @@ export class TagDisplayComponent {
     // Add more objects as needed
   ];
 
-  constructor(private tagService: TagService) {
-    this.tagService.findAllByDateRange().subscribe(
+  constructor(private tagService: TagService, private router: Router) {
+    this.getData()
+  }
+
+  async getData(){
+    await this.tagService.findAllByDateRange().subscribe(
       (data) => {
         console.log('Response:', data);
         this.data = data;
@@ -37,5 +42,9 @@ export class TagDisplayComponent {
         console.error('Error:', error);
       }
     );
+  }
+
+  displayTag(item: TagDto) {
+    this.router.navigate(['/tag', item.name, item.type]);
   }
 }

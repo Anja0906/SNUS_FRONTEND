@@ -1,0 +1,172 @@
+.parent {
+  display: grid;
+  grid-template-columns: 3% 66% 3% 25% 3%;
+  height: 100%;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 31% 3% 31% 3% 32%;
+}
+
+.top-parent{
+  display: grid;
+  place-items: center;
+  color: #F2EEE7;
+  font-size: large;
+  height: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.right {
+  border-radius: 1rem;
+  background: #182034;
+  display: grid;
+  place-items: center;
+  text-align: left;
+  height: 100%;
+}
+
+.left {
+  display: grid;
+
+}
+
+.item {
+  color: #F2EEE7;
+  padding: 0.5rem;
+}
+
+.container {
+  background: #182034;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.divider {
+  width: 1px;
+  height: 100%;
+  background: white;
+}
+
+.right-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Stack switch and text vertically */
+  color: white;
+  font-size: 1rem;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #435892;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.text {
+  margin-top: 0.5rem; /* Space between switch and text */
+}
+.numberText {
+  font-size: xxx-large;
+}
+
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Stack icon and text vertically */
+  color: white;
+  font-size: 1rem;
+}
+
+.left-content:hover{
+  cursor: pointer;
+  color: #BCAA8A;
+}
+.right-content:hover{
+  cursor: pointer;
+  color: #BCAA8A;
+}
+.right-content:hover .text{
+  color: #BCAA8A;
+}
+
+.icon img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.text {
+  color: white;
+  font-size: 1rem; /* Adjust the size as needed */
+  margin-top: 0.5rem; /* Space between icon and text */
+  text-align: center; /* Center the text */
+}
+.left-content:hover .text{
+  color: #BCAA8A;
+}
+
+.left-content:hover .icon img{
+  width: 60px; /* Adjust the width of the image */
+  height: auto;
+}
+
+
+
+

@@ -6,9 +6,11 @@ import {TagDisplayComponent} from "./tag-display/tag-display.component";
 import {CreateAlarmComponent} from "./create-alarm/create-alarm.component";
 import {AlarmDisplayComponent} from "./alarm-display/alarm-display.component";
 import {ReportsComponent} from "./reports/reports.component";
-import {NavigationBarComponent} from "./navigation-bar/navigation-bar.component";
 import {AppComponent} from "./app.component";
 import {MainComponent} from "./main/main.component";
+import {TagDetailComponent} from "./tag-detail/tag-detail.component";
+import {ChartComponent} from "./chart/chart.component";
+import {DonutChartComponent} from "./donut-chart/donut-chart.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,9 +22,11 @@ const routes: Routes = [
       {path: 'reports', component: ReportsComponent}] },
   {path: 'createTag', component: CreateTagComponent},
   {path: 'tagDisplay', component: TagDisplayComponent},
-  {path: 'createAlarm', component: CreateAlarmComponent},
+  {path: 'createAlarm/:id', component: CreateAlarmComponent},
   {path: 'reports', component: ReportsComponent},
-  { path:'', component: AppComponent}
+  { path:'', component: AppComponent},
+  { path: 'tag/:name/:type', component: TagDetailComponent},
+  { path: 'chart', component: DonutChartComponent},
 ];
 
 @NgModule({

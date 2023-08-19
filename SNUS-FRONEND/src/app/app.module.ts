@@ -17,6 +17,12 @@ import { DiTagComponent } from './di-tag/di-tag.component';
 import { DoTagComponent } from './do-tag/do-tag.component';
 import { AoTagComponent } from './ao-tag/ao-tag.component';
 import { AiTagComponent } from './ai-tag/ai-tag.component';
+import { TagDetailComponent } from './tag-detail/tag-detail.component';
+import { ChartComponent } from './chart/chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DonutChartComponent } from './donut-chart/donut-chart.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ErrorPopupComponent } from './error-popup/error-popup.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +38,20 @@ import { AiTagComponent } from './ai-tag/ai-tag.component';
     DiTagComponent,
     DoTagComponent,
     AoTagComponent,
-    AiTagComponent
+    AiTagComponent,
+    TagDetailComponent,
+    ChartComponent,
+    DonutChartComponent,
+    ErrorPopupComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

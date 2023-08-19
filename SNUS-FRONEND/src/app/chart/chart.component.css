@@ -1,0 +1,26 @@
+ngx-charts-legend{
+  color: #BCAA8A;
+  width: 10rem !important;
+}
+legend-labels{
+  width: 5rem !important;
+}
+ngx-charts-legend-entry{
+  color: #BCAA8A;
+  width: 5rem !important;
+}
+ngx-charts-axis-label text{
+  color: #BCAA8A !important;
+}
+ngx-charts-axis-label  {
+  color: #F2EEE7 !important;
+}
+ngx-charts-y-axis{
+  color: #F2EEE7 !important;
+}
+
+/deep/ .ngx-charts-bar-vertical{
+  color: #F2EEE7;
+}
+
+

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavigationBarComponent } from './navigation-bar.component';
+import { ErrorPopupComponent } from './error-popup.component';
 
-describe('NavigationBarComponent', () => {
-  let component: NavigationBarComponent;
-  let fixture: ComponentFixture<NavigationBarComponent>;
+describe('ErrorPopupComponent', () => {
+  let component: ErrorPopupComponent;
+  let fixture: ComponentFixture<ErrorPopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationBarComponent ]
+      declarations: [ ErrorPopupComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavigationBarComponent);
+    fixture = TestBed.createComponent(ErrorPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
