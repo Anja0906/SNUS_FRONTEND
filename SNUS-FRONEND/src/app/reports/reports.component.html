@@ -8,17 +8,17 @@
       <div class="container">
         <div class="radio-group">
           <label class="radio">
-            <input type="radio" name="sort" value="Time">
+            <input type="radio" name="sort" [(ngModel)]="selectedSort" value="Time">
             <span class="radio-custom"></span>
             Time
           </label>
           <label class="radio">
-            <input type="radio" name="sort" value="Priority">
+            <input type="radio" name="sort" [(ngModel)]="selectedSort" value="Priority">
             <span class="radio-custom"></span>
             Priority
           </label>
           <label class="radio">
-            <input type="radio" name="sort" value="Value">
+            <input type="radio" name="sort" [(ngModel)]="selectedSort" value="Value">
             <span class="radio-custom"></span>
             Value
           </label>
@@ -28,12 +28,12 @@
       <div class="container">
         <div class="radio-group">
           <label class="radio">
-            <input type="radio" name="sortType" value="Ascending">
+            <input type="radio" name="sortType" [(ngModel)]="selectedSortType" value="Ascending">
             <span class="radio-custom"></span>
             Ascending
           </label>
           <label class="radio">
-            <input type="radio" name="sortType" value="Descending">
+            <input type="radio" name="sortType" [(ngModel)]="selectedSortType" value="Descending">
             <span class="radio-custom"></span>
             Descending
           </label>
@@ -116,8 +116,8 @@
           <thead>
           <tr>
             <th>AnalogInput id</th>
-            <th>Date Time</th>
             <th>Priority</th>
+            <th>Date Time</th>
             <th>Type</th>
             <th>Message</th>
           </tr>
@@ -125,8 +125,8 @@
           <tbody>
           <tr *ngFor="let item of alarmData" (click)="displayAlarm(item)">
             <td>{{ item.analogId }}</td>
-            <td>{{ item.timeStamp }}</td>
-            <td>{{ item.priority | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+            <td>{{ item.priority }}</td>
+            <td>{{ item.timeStamp | date:'dd.MM.yyyy HH:mm:ss' }}</td>
             <td>{{ item.type }}</td>
             <td>{{ item.message }}</td>
           </tr>
@@ -154,3 +154,5 @@
   </div>
   <div></div>
 </div>
+<app-error-popup [message]="errorMessage" [showPopup]="showErrorPopup" (closePopupEvent)="closeErrorPopup()"></app-error-popup>
+

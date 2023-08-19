@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-error-popup',
@@ -6,9 +6,11 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./error-popup.component.css']
 })
 export class ErrorPopupComponent {
-  @Input() errorMessage: string = "";
+  @Input() message: string = '';
+  @Input() showPopup: boolean = false;
+  @Output() closePopupEvent = new EventEmitter<void>();
 
   closePopup() {
-    this.errorMessage = "";
+    this.closePopupEvent.emit();
   }
 }

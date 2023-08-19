@@ -12,8 +12,8 @@ import {ReportsService} from "../service/reports.service";
   encapsulation: ViewEncapsulation.None
 })
 export class ReportsComponent{
-  dateFrom: Date = new Date();
-  dateTo: Date = new Date();
+  dateFrom: Date | undefined;
+  dateTo: Date | undefined;
   title: string = "Title";
   inputValue:number=0;
   colorScheme = [
@@ -22,6 +22,21 @@ export class ReportsComponent{
   ]
   alarmData: Alarm[] | undefined;
   tagData: TagDto[] | undefined;
+
+  showErrorPopup: boolean = false;
+  errorMessage: string = '';
+
+  selectedSort: string = 'Time';
+  selectedSortType: string = 'Ascending';
+
+  showError(message:string) {
+    this.errorMessage = message;
+    this.showErrorPopup = true;
+  }
+
+  closeErrorPopup() {
+    this.showErrorPopup = false;
+  }
   lineChartData = [
     {
       "name": "Aruba",
@@ -156,7 +171,7 @@ export class ReportsComponent{
   async getData(){
     switch (this.selectedOption){
       case "1":
-        this.firstReport("2022-07-28T01:24:07.1883847", "2024-07-28T01:24:07.1883847", 1);
+        this.firstReport();
         this.tagData = undefined;
         break;
       case "2":
@@ -183,8 +198,21 @@ export class ReportsComponent{
     }
   }
 
-  async firstReport(from: string, to: string, sort: number){
-    this.alarmData = await this.reportService.getAlarmsByDateRange(from, to, sort);
+  async firstReport(){
+    if(this.dateFrom==undefined){
+      this.showError("You need to choose the date from!")
+    }
+    else if (this.dateTo==undefined){
+      this.showError("You need to choose the date to!")
+    }
+    else{
+      if (this.selectedSortType=="Ascending"){
+        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 0);
+      }
+      else{
+        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 1);
+      }
+    }
   }
   async secondReport(priority: number, sort: number){
     this.alarmData = await this.reportService.getAlarmsByPriority(priority, sort);
