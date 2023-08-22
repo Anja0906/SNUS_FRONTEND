@@ -1,0 +1,31 @@
+<div class="parent">
+  <table class="container">
+    <thead>
+    <tr>
+      <th>Threshold</th>
+      <th>Message</th>
+      <th>Priority</th>
+      <th></th>
+      <th>Type</th>
+      <th>Timestamp</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let alarm of alarms; let i = index">
+      <td>{{ alarm.threshHold }}</td>
+      <td>{{ alarm.message }}</td>
+      <td>{{ alarm.priority }}</td>
+      <td>
+        <div class="priority" [ngStyle]="getCellStyles(alarm.priority)"></div></td>
+      <td>{{ alarm.type }}</td>
+      <td>{{ alarm.timeStamp | date }}</td>
+      <td class="actions">
+        <button class="delete-button" (click)="deleteAlarm(alarm, i)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

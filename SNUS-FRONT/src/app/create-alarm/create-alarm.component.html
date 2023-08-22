@@ -1,0 +1,37 @@
+<div class="parent">
+  <form [formGroup]="alarmForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-field">
+      <div class="simpleParent">
+        <h3>DIGITAL INPUT FORM</h3>
+      </div>
+      <label for="treshHold">TreshHold:</label>
+      <input type="number" id="treshHold" formControlName="threshHold" required>
+    </div>
+
+    <div class="form-field">
+      <label for="message">Message:</label>
+      <input type="text" id="message" formControlName="message" required>
+    </div>
+
+    <div class="form-field">
+      <label for="priority">Priority:</label>
+      <select id="priority" formControlName="priority">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="type">Type:</label>
+      <select id="type" formControlName="type">
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+
+    <div class="simpleParent">
+      <button type="submit" class="buttonSubmit">Submit</button>
+    </div>
+  </form>
+</div>
