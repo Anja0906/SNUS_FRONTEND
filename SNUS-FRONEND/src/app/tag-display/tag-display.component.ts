@@ -25,7 +25,6 @@ export class TagDisplayComponent {
       value: 200,
       type: "AO"
     },
-    // Add more objects as needed
   ];
 
   constructor(private tagService: TagService, private router: Router) {

@@ -43,13 +43,13 @@
     <div></div>
     <div class="container">
       <div class="text">Report type:</div>
-      <select id="dropdown" [(ngModel)]="selectedOption">
+      <select id="dropdown" [(ngModel)]="selectedOption" (ngModelChange)="onDropdownChange($event)">
         <option value="1">Alarms in date range</option>
         <option value="2">Alarms with some priority</option>
         <option value="3">All tags by date range</option>
         <option value="4">Last AI tags values</option>
         <option value="5">Last DI tags values</option>
-        <option value="6">All tags by id</option>
+        <option value="6">All tags by name</option>
       </select>
     </div>
     <div></div>
@@ -70,11 +70,24 @@
       <div class="container">
         <div class="input-container" *ngIf="!sixth">
           <label class="input-label">Priority:</label>
-          <input type="number" [(ngModel)]="inputValue">
+          <input type="number" [(ngModel)]="priority">
         </div>
-        <div class="input-container" *ngIf="sixth">
-          <label class="input-label">Name:</label>
-          <input type="text">
+        <div *ngIf="sixth">
+          <div class="inline-container">
+            <label class="input-label" for="tagType">Tag type:</label>
+            <select id="tagType" [(ngModel)]="selectedTagType">
+              <option value="0">AnalogInput</option>
+              <option value="1">AnalogOutput</option>
+              <option value="2">DigitalInput</option>
+              <option value="3">DigitalOutput</option>
+            </select>
+          </div>
+          <div class="inline-container">
+            <label class="input-label" for="name">Name:</label>
+            <div class="textInput">
+              <input id="name" type="text" [(ngModel)]="name">
+            </div>
+          </div>
         </div>
         <div class="input-container">
           <button class="btn" (click)="getData()">Confirm changes</button>
@@ -103,7 +116,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of tagData" (click)="displayTag(item)">
+          <tr *ngFor="let item of tagData">
             <td>{{ item.name }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.dateTime | date:'dd.MM.yyyy HH:mm:ss' }}</td>
@@ -123,7 +136,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of alarmData" (click)="displayAlarm(item)">
+          <tr *ngFor="let item of alarmData">
             <td>{{ item.analogId }}</td>
             <td>{{ item.priority }}</td>
             <td>{{ item.timeStamp | date:'dd.MM.yyyy HH:mm:ss' }}</td>

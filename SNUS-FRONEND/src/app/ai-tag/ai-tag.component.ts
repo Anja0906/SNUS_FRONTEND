@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AnalogInputDto} from "../model/AnalogInput";
 import {TagService} from "../service/tag.service";
 
 @Component({

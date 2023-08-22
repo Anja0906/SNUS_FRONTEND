@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DigitalOutputDto} from "../model/DigitalOutput";
-import {TagService} from "../service/tag.service";
 
 @Component({
   selector: 'app-create-tag',

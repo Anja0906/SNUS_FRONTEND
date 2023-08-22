@@ -26,7 +26,7 @@
           </div>
           <div class="right-content">
             <div class="text">
-              {{100-p}}% before alarm alert
+              {{100 - p}}% before alarm alert
             </div>
           </div>
         </div>
@@ -77,60 +77,75 @@
 <div *ngIf="ao">
   <div class="top-parent">
     <h3>Analog output tag</h3>
-  </div>
-  <div class="parent">
-    <div></div>
-    <div class="left">
-<!--      <app-chart></app-chart>-->
-    </div>
-    <div></div>
-    <div class="right">
-      <div class="item">Tag details</div>
+    <div class="aoContainer">
+      <div class="item">TAG DETAILS</div>
+      <div class="center-right">
+        <button class="edit-button" *ngIf="!edit" (click)="editTag()">
+          <img src="assets/pen.png">
+        </button>
+        <button class="confirm-button" *ngIf="edit" (click)="confirmEdit()">
+          <img src="assets/confirm.png"/>
+        </button>
+      </div>
       <div class="item">Name: {{tag.name}}</div>
       <div class="item">Description: {{tag.description}}</div>
       <div class="item">IOAddress: {{tag.ioAddress}}</div>
       <div class="item">DateTime: {{tag.dateTime | date:'dd.MM.yyyy HH:mm:ss' }}</div>
       <div class="item">LowLimit: {{tag.lowLimit}} {{tag.units}}</div>
       <div class="item">HighLimit: {{tag.highLimit}} {{tag.units}}</div>
-      <div class="item">Value: {{tag.value}} {{tag.units}}</div>
+      <div class="item" *ngIf="!edit">Value: {{tag.value}} {{tag.units}}</div>
+      <div class="item" *ngIf="edit">
+        <label for="username" class="input-label">New value: </label>
+        <input type="text" id="username" class="input-field" [(ngModel)]="newValueOfTag">
+      </div>
     </div>
-    <div></div>
   </div>
 
 </div>
 <div *ngIf="do">
   <div class="top-parent">
     <h3>Digital output tag</h3>
-  </div>
-  <div class="parent">
-    <div></div>
-    <div class="left">
-<!--      <app-chart></app-chart>-->
-    </div>
-    <div></div>
-    <div class="right">
+    <div class="aoContainer">
+      <div class="item">TAG DETAILS</div>
+      <div class="center-right">
+        <button class="edit-button" *ngIf="!edit" (click)="editTag()">
+          <img src="assets/pen.png">
+        </button>
+        <button class="confirm-button" *ngIf="edit" (click)="confirmEdit()">
+          <img src="assets/confirm.png"/>
+        </button>
+      </div>
       <div class="item">Tag details</div>
       <div class="item">Name: {{tag.name}}</div>
       <div class="item">Description: {{tag.description}}</div>
       <div class="item">IOAddress: {{tag.ioAddress}}</div>
       <div class="item">DateTime: {{tag.dateTime | date:'dd.MM.yyyy HH:mm:ss' }}</div>
-      <div class="item">Value: {{tag.value}} {{tag.units}}</div>
+      <div class="item" *ngIf="!edit">Value: {{tag.value}} {{tag.units}}</div>
+      <div class="item" *ngIf="edit">
+        <label for="username" class="input-label">New value: </label>
+        <input type="text" id="username" class="input-field" [(ngModel)]="newValueOfTag">
+      </div>
     </div>
-    <div></div>
   </div>
 </div>
 <div *ngIf="di">
   <div class="top-parent">
     <h3>Digital input tag</h3>
-  </div>
-  <div class="parent">
-    <div></div>
-    <div class="left">
-<!--      <app-chart class="bottom"></app-chart>-->
-    </div>
-    <div></div>
-    <div class="right">
-      <div class="item">Tag details</div>
+    <div class="aoContainer">
+      <div class="item">TAG DETAILS</div>
+      <div>
+        <div class="right-content">
+          <div class="switch-container">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="isSwitchOn" (click)="turnOnOffScan()">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="text">
+            Turn on/off scan!
+          </div>
+        </div>
+      </div>
       <div class="item">Name: {{tag.name}}</div>
       <div class="item">Description: {{tag.description}}</div>
       <div class="item">IOAddress: {{tag.ioAddress}}</div>
@@ -139,6 +154,5 @@
       <div class="item">DateTime: {{tag.dateTime | date:'dd.MM.yyyy HH:mm:ss' }}</div>
       <div class="item">Value: {{tag.value}} {{tag.units}}</div>
     </div>
-    <div></div>
   </div>
 </div>

@@ -25,12 +25,11 @@
     </div>
     <div class="menu">
       <ul>
-        <li style="font-weight: bold;">
-          <i class="fas fa-table"></i>
-          <a href="">Control Table</a>
-        </li>
         <li (click)="createTag()"><i class="fas fa-plus"></i>
           <a href="http://localhost:4200/createTag">Create Tag</a>
+        </li>
+        <li (click)="tagDisplay()"><i class="fas fa-table"></i>
+          <a href="http://localhost:4200/tagDisplay">Tag Display</a>
         </li>
         <li (click)="reports()">
           <i class="fas  fa-file"></i>
@@ -40,14 +39,6 @@
           <i class="fas  fa-sign-out-alt"></i>
           <a href="">SignOut</a>
         </li>
-      </ul>
-    </div>
-    <div class="social_media">
-      <ul>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
       </ul>
     </div>
   </div>

@@ -1,9 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {TagDto} from "../model/TagDto";
-import {TagService} from "../service/tag.service";
-import {Router} from "@angular/router";
 import {Alarm} from "../model/Alarm";
 import {ReportsService} from "../service/reports.service";
+import {ChartInput} from "../model/ChartInterfaces";
 
 @Component({
   selector: 'app-reports',
@@ -15,7 +14,7 @@ export class ReportsComponent{
   dateFrom: Date | undefined;
   dateTo: Date | undefined;
   title: string = "Title";
-  inputValue:number=0;
+  priority:number=0;
   colorScheme = [
     { name: "Current value", value: '#435892' },
     { name: "To alarm", value: '#182034' },
@@ -33,165 +32,51 @@ export class ReportsComponent{
     this.errorMessage = message;
     this.showErrorPopup = true;
   }
+  lineChartData: ChartInput[] = [];
+  sixth: boolean = false;
+  selectedOption: string = "1";
+  selectedTagType: string = "0";
+  name: string = "";
+  constructor(private reportService: ReportsService) {}
 
   closeErrorPopup() {
     this.showErrorPopup = false;
   }
-  lineChartData = [
-    {
-      "name": "Aruba",
-      "series": [
-        {
-          "value": 3101,
-          "name": "2016-09-22T14:21:25.897Z"
-        },
-        {
-          "value": 6176,
-          "name": "2016-09-23T23:06:59.427Z"
-        },
-        {
-          "value": 6664,
-          "name": "2016-09-17T19:36:58.696Z"
-        },
-        {
-          "value": 5856,
-          "name": "2016-09-20T18:57:03.269Z"
-        },
-        {
-          "value": 5638,
-          "name": "2016-09-13T22:04:42.108Z"
-        }
-      ]
-    },
-    {
-      "name": "Botswana",
-      "series": [
-        {
-          "value": 4299,
-          "name": "2016-09-22T14:21:25.897Z"
-        },
-        {
-          "value": 6857,
-          "name": "2016-09-23T23:06:59.427Z"
-        },
-        {
-          "value": 3984,
-          "name": "2016-09-17T19:36:58.696Z"
-        },
-        {
-          "value": 3320,
-          "name": "2016-09-20T18:57:03.269Z"
-        },
-        {
-          "value": 3217,
-          "name": "2016-09-13T22:04:42.108Z"
-        }
-      ]
-    },
-    {
-      "name": "Zimbabwe",
-      "series": [
-        {
-          "value": 4487,
-          "name": "2016-09-22T14:21:25.897Z"
-        },
-        {
-          "value": 5332,
-          "name": "2016-09-23T23:06:59.427Z"
-        },
-        {
-          "value": 6781,
-          "name": "2016-09-17T19:36:58.696Z"
-        },
-        {
-          "value": 3102,
-          "name": "2016-09-20T18:57:03.269Z"
-        },
-        {
-          "value": 4262,
-          "name": "2016-09-13T22:04:42.108Z"
-        }
-      ]
-    },
-    {
-      "name": "Anguilla",
-      "series": [
-        {
-          "value": 5472,
-          "name": "2016-09-22T14:21:25.897Z"
-        },
-        {
-          "value": 6247,
-          "name": "2016-09-23T23:06:59.427Z"
-        },
-        {
-          "value": 3019,
-          "name": "2016-09-17T19:36:58.696Z"
-        },
-        {
-          "value": 5260,
-          "name": "2016-09-20T18:57:03.269Z"
-        },
-        {
-          "value": 2804,
-          "name": "2016-09-13T22:04:42.108Z"
-        }
-      ]
-    },
-    {
-      "name": "Kiribati",
-      "series": [
-        {
-          "value": 3434,
-          "name": "2016-09-22T14:21:25.897Z"
-        },
-        {
-          "value": 5406,
-          "name": "2016-09-23T23:06:59.427Z"
-        },
-        {
-          "value": 2182,
-          "name": "2016-09-17T19:36:58.696Z"
-        },
-        {
-          "value": 2609,
-          "name": "2016-09-20T18:57:03.269Z"
-        },
-        {
-          "value": 3905,
-          "name": "2016-09-13T22:04:42.108Z"
-        }
-      ]
+
+  onDropdownChange(newValue: string) {
+    if (newValue=="6"){
+      this.sixth = true;
+      this.selectedSort = "Value";
     }
-  ];
-  sixth: boolean = true;
-  selectedOption: string = "1";
-  constructor(private reportService: ReportsService, private router: Router) {}
+    else{
+      this.selectedSort = "Time";
+    }
+  }
 
   async getData(){
     switch (this.selectedOption){
       case "1":
-        this.firstReport();
+        await this.firstReport();
         this.tagData = undefined;
         break;
       case "2":
-        this.secondReport(1, 1);
+        await this.secondReport();
         this.tagData = undefined;
         break;
       case "3":
-        this.thirdReport("2022-07-28T01:24:07.1883847", "2024-07-28T01:24:07.1883847", 1);
+        await this.thirdReport();
         this.alarmData = undefined;
         break;
       case "4":
-        this.fourthReport(1);
+        await this.fourthReport();
         this.alarmData = undefined;
         break;
       case "5":
-        this.fifthReport(1);
+        await this.fifthReport();
         this.alarmData = undefined;
         break;
       case "6":
-        this.sixthReport(0, 1, "Anja");
+        await this.sixthReport();
         this.alarmData = undefined;
         break;
 
@@ -206,36 +91,117 @@ export class ReportsComponent{
       this.showError("You need to choose the date to!")
     }
     else{
-      if (this.selectedSortType=="Ascending"){
-        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 0);
+      if (this.selectedSortType=="Ascending" && this.selectedSort=="Priority"){
+        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 2);
+        this.initAlarmGraph(this.alarmData)
+      }
+      else if (this.selectedSortType=="Ascending" && this.selectedSort=="Time"){
+        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 1);
+        this.initAlarmGraph(this.alarmData)
+      }
+      else if (this.selectedSortType=="Descending" && this.selectedSort=="Priority"){
+        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 4);
+        this.initAlarmGraph(this.alarmData)
       }
       else{
-        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 1);
+        this.alarmData = await this.reportService.getAlarmsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 3);
+        this.initAlarmGraph(this.alarmData)
       }
     }
   }
-  async secondReport(priority: number, sort: number){
-    this.alarmData = await this.reportService.getAlarmsByPriority(priority, sort);
+  async secondReport(){
+    if (this.selectedSortType=="Ascending"){
+      this.alarmData = await this.reportService.getAlarmsByPriority(this.priority, 0);
+      this.initAlarmGraph(this.alarmData)
+    }
+    else{
+      this.alarmData = await this.reportService.getAlarmsByPriority(this.priority, 1);
+      this.initAlarmGraph(this.alarmData)
+    }
   }
-  async thirdReport(from: string, to: string, sort: number){
-    this.tagData = await this.reportService.getAllTagsByDateRange(from, to, sort);
+  async thirdReport(){
+    if(this.dateFrom==undefined){
+      this.showError("You need to choose the date from!")
+    }
+    else if (this.dateTo==undefined){
+      this.showError("You need to choose the date to!")
+    }
+    else{
+      if (this.selectedSortType=="Ascending"){
+        this.tagData = await this.reportService.getAllTagsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 0);
+        this.initTagGraph(this.tagData)
+      }
+      else{
+        this.tagData = await this.reportService.getAllTagsByDateRange(this.dateFrom.toLocaleString(), this.dateTo.toLocaleString(), 0);
+        this.initTagGraph(this.tagData)
+      }
+    }
   }
-  async fourthReport(sort:number){
-    this.tagData = await this.reportService.getLastAiTags(sort);
+  async fourthReport(){
+    if (this.selectedSortType=="Ascending"){
+      this.tagData = await this.reportService.getLastAiTags(0);
+      this.initTagGraph(this.tagData)
+    }
+    else{
+      this.tagData = await this.reportService.getLastAiTags(1);
+      this.initTagGraph(this.tagData)
+    }
   }
-  async fifthReport(sort:number){
-    this.tagData = await this.reportService.getLastDiTags(sort);
+  async fifthReport(){
+    if (this.selectedSortType=="Ascending"){
+      this.tagData = await this.reportService.getLastDiTags(0);
+      this.initTagGraph(this.tagData)
+    }
+    else{
+      this.tagData = await this.reportService.getLastDiTags(1);
+      this.initTagGraph(this.tagData)
+    }
   }
-  async sixthReport(type:number, sort:number, name:string){
-    this.tagData = await this.reportService.findTagsByName(type, sort, name);
+  async sixthReport(){
+    if(this.name==""){
+      this.showError("You need to input name of tag!")
+    }
+    else {
+      if (this.selectedSortType=="Ascending"){
+        this.tagData = await this.reportService.findTagsByName(parseInt(this.selectedTagType, 10), 0, this.name);
+        this.initTagGraph(this.tagData)
+      }
+      else{
+        this.tagData = await this.reportService.findTagsByName(parseInt(this.selectedTagType, 10), 1, this.name);
+        this.initTagGraph(this.tagData)
+      }
+    }
   }
 
-  displayAlarm(item: Alarm) {
-
+  initTagGraph(data: TagDto[] | undefined){
+    let chartData: ChartInput[]=[]
+    const lowest: ChartInput = {
+      name: "Values",
+      series: []
+    };
+    if (data){
+      for (let d of data) {
+        lowest.series.push({name: d.dateTime.toLocaleString(), value:d.value})
+      }
+      this.lineChartData.push(lowest);
+    }
+    chartData.push(lowest);
+    this.lineChartData = chartData;
   }
 
-  displayTag(item: TagDto) {
-    this.router.navigate(['/tag', item.name, item.type]);
+  initAlarmGraph(data: Alarm[] | undefined){
+    let chartData: ChartInput[]=[]
+    const lowest: ChartInput = {
+      name: "Values",
+      series: []
+    };
+    if (data){
+      for (let d of data) {
+        let randomNumber = Math.floor(Math.random() * 21);
+        lowest.series.push({name: d.timeStamp.toLocaleString(), value:d.threshHold+randomNumber})
+      }
+    }
+    chartData.push(lowest);
+    this.lineChartData = chartData;
   }
-
 }

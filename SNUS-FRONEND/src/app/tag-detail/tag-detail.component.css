@@ -48,6 +48,87 @@
   padding: 1rem;
 }
 
+.center-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding-right: 20px; /* Adjust the padding as needed */
+}
+
+.edit-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+.edit-button img{
+  width: 20px;
+  height: 20px;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.confirm-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(242, 238, 231, 0.4);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+.confirm-button img{
+  width: 20px;
+  height: 20px;
+}
+
+.confirm-button:hover {
+  background-color: rgba(11, 239, 47, 0.4);
+}
+
+.input-label{
+  margin: 5px;
+}
+
+.input-field {
+  padding: 5px;
+  width: 4rem;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.input-field:focus {
+  background-color: #444;
+  outline: none;
+}
+
+
+.aoContainer {
+  margin-top: 3rem;
+  background: #182034;
+  border-radius: 1rem;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
 .divider {
   width: 1px;
   height: 100%;

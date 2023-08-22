@@ -1,1 +1,24 @@
-<p>alarm-display works!</p>
+<div class="parent">
+  <h3 style="color: #F2EEE7">Alarms</h3>
+  <table class="container" *ngIf="alarmData">
+    <thead>
+    <tr>
+      <th>AnalogInput id</th>
+      <th>Priority</th>
+      <th>Date Time</th>
+      <th>Type</th>
+      <th>Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of alarmData" [ngStyle]="getCellStyles(item.priority)" style="color: #3b3838"
+    (click)="displayTag(item)">
+      <td>{{ item.analogId }}</td>
+      <td>{{ item.priority }}</td>
+      <td>{{ item.timeStamp | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+      <td>{{ item.type }}</td>
+      <td>{{ item.message }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

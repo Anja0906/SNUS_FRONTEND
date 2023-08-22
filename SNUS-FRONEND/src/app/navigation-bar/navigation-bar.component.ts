@@ -20,4 +20,8 @@ export class NavigationBarComponent {
   reports() {
     this.router.navigate(['reports']);
   }
+
+  tagDisplay() {
+    this.router.navigate(['tagDisplay']);
+  }
 }

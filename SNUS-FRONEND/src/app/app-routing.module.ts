@@ -9,7 +9,6 @@ import {ReportsComponent} from "./reports/reports.component";
 import {AppComponent} from "./app.component";
 import {MainComponent} from "./main/main.component";
 import {TagDetailComponent} from "./tag-detail/tag-detail.component";
-import {ChartComponent} from "./chart/chart.component";
 import {DonutChartComponent} from "./donut-chart/donut-chart.component";
 
 const routes: Routes = [
@@ -27,6 +26,7 @@ const routes: Routes = [
   { path:'', component: AppComponent},
   { path: 'tag/:name/:type', component: TagDetailComponent},
   { path: 'chart', component: DonutChartComponent},
+  { path: 'alarms', component: AlarmDisplayComponent},
 ];
 
 @NgModule({

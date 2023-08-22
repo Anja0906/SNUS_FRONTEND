@@ -1,0 +1,53 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  color: #F2EEE7;
+}
+
+.container{
+  background: #182034;
+  border-radius: 0.5rem;
+  width: 94%;
+  margin-top: 5rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.parent{
+  display: grid;
+  place-items: center;
+
+}
+
+thead {
+  background: #182034;
+  color: #BCAA8A;
+  position: sticky;
+  top: 0;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+
+tr:hover {
+  background: #182034;
+  color: #BCAA8A;
+}
+
+.container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #BCAA8A;
+  border-radius: 5px;
+}
+
+
+

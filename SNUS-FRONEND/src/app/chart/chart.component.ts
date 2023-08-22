@@ -13,8 +13,6 @@ export class ChartComponent implements OnInit{
   @Input() type!: string;
 
   view: [number, number] = [700, 700];
-  showXAxis = true;
-  showYAxis = true;
   Legend: string = "Legend";
   chartData: { name: string; value: number }[] = [];
   chartColors: { name: string; value: string }[] = [];
@@ -38,7 +36,7 @@ export class ChartComponent implements OnInit{
   setChartData(){
     if (this.aiTags!=undefined){
       for (let aiTag of this.aiTags) {
-        if (aiTag!=null && aiTag.dateTime!=null){
+        if (aiTag != null && aiTag.dateTime != null){
           this.chartData.push({ name: aiTag.dateTime.toString(), value: aiTag.value });
           console.log({ name: aiTag.dateTime.toString(), value: aiTag.value });
           let firstLimit = Math.floor(aiTag.highLimit / 3);

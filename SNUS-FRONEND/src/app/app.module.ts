@@ -6,7 +6,7 @@ import { MainComponent } from './main/main.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { CreateTagComponent } from './create-tag/create-tag.component';
 import { TagDisplayComponent } from './tag-display/tag-display.component';

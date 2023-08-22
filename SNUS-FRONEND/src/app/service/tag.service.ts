@@ -42,6 +42,12 @@ export class TagService {
   async getAoTagByName(name:string): Promise<AnalogOutput | undefined>{
     return await this.http.get<AnalogOutput>('https://localhost:8081/api/AnalogOutput/getByName/'+name).toPromise();
   }
+  updateAoTag(tag:AnalogOutputDto, id:number){
+    return this.http.post('https://localhost:8081/api/AnalogOutput/update/'+id, tag);
+  }
+  updateDoTag(tag:DigitalOutputDto, id:number){
+    return this.http.post('https://localhost:8081/api/DigitalOutput/update/'+id, tag);
+  }
   async getDiTagByName(name:string): Promise<DigitalInput | undefined>{
     return await this.http.get<DigitalInput>('https://localhost:8081/api/DigitalInput/getByName/'+name).toPromise();
   }
@@ -51,7 +57,10 @@ export class TagService {
   async getAIsByName(name:string): Promise<AnalogInput[] | undefined>{
     return await this.http.get<AnalogInput[]>('https://localhost:8081/api/AnalogInput/getAllByName/' + name + "/0").toPromise();
   }
-  turnOnOff(id:number){
+  turnOnOffAnalog(id:number){
     return this.http.put('https://localhost:8081/api/AnalogInput/turnOnOff/' + id, {});
+  }
+  turnOnOffDigital(id:number){
+    return this.http.put('https://localhost:8081/api/DigitalInput/turnOnOff/' + id, {});
   }
 }
