@@ -19,7 +19,8 @@ export class AlarmDisplayComponent implements OnInit{
     const hubConnection = this.signalRService.getConnection();
 
     hubConnection.on('ReceiveAlarm', (alarm) => {
-      this.alarmData?.push(alarm);
+      console.log("New allaaarm")
+      this.getData()
     });
   }
 
